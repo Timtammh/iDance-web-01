@@ -45,9 +45,13 @@ The analytics test temporarily builds with a fake measurement ID; rebuild normal
 - Added @gsap/react 2.1.2 and replaced the old Home useEffect animation setup with scoped useGSAP/matchMedia.
 - Build, lint and root typecheck passed after the implementation change.
 - Existing functional and accessibility tests passed with the new card wrappers and animation behavior.
-- Four dedicated motion tests passed: desktop lifecycle/rapid scrolling/route cleanup; mobile and reduced-motion; delayed provider content and failed product images; partial Hero initialization failure with static rollback.
+- Five dedicated motion tests passed: desktop lifecycle/rapid scrolling/route cleanup; mobile and reduced-motion; delayed provider content and failed product images; partial Hero initialization failure with static rollback; measured card hover and tab indicator interpolation.
 - Normal desktop motion test: no page errors or console warnings, zero ScrollTriggers/repeating tweens after navigating to About, no count growth across three return trips or repeated tabs.
 - Inactive-tab gating tested via simulated document.hidden + visibilitychange; offscreen gating tested via actual scrolling and IntersectionObserver.
 - Live Sanity content was not queried. Delayed demo loading exercises the shared asynchronous ContentProvider mounting path; actual CMS asset changes still need validation with the real dataset.
 - Local Chrome desktop frame sample during programmatic native scrolling: 119 measured frames, p95 17.6 ms, max 18.4 ms, zero frames over 50 ms. This is a local diagnostic, not a cross-device performance guarantee.
 - Motion configuration and ownership are documented in MOTION.md.
+
+### Additional Sanity adapter verification
+
+The dedicated Sanity-mode browser suite passed with network interception. It covers actual client/query/image-builder execution, delayed response, error/retry with no silent demo fallback, valid generated image loading, and product-grid trigger geometry after 375/768/1440px resizing (within 2px). Route cleanup and CMS product rendering also passed. This uses fixtures, not a live remote Sanity dataset. Hero headline now retains a word separator across its visual line break for text reading/accessibility.

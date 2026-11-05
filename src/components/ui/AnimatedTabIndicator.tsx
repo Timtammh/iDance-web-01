@@ -45,12 +45,23 @@ export function AnimatedTabIndicator({ active }: { active: string }) {
         };
         // Initial work belongs to matchMedia; only later observer calls enter contextSafe.
         update();
-        const observer = new ResizeObserver(contextSafe!(() => {
-          const button = parent.querySelector<HTMLElement>('[aria-selected="true"]');
-          if (button && (button.offsetLeft !== previous.current?.x || button.offsetWidth !== previous.current?.width)) update();
-        }));
+        const observer = new ResizeObserver(
+          contextSafe!(() => {
+            const button = parent.querySelector<HTMLElement>(
+              '[aria-selected="true"]',
+            );
+            if (
+              button &&
+              (button.offsetLeft !== previous.current?.x ||
+                button.offsetWidth !== previous.current?.width)
+            )
+              update();
+          }),
+        );
         observer.observe(parent);
-        parent.querySelectorAll('button').forEach(button => observer.observe(button));
+        parent
+          .querySelectorAll("button")
+          .forEach((button) => observer.observe(button));
         return () => {
           disposed = true;
           observer.disconnect();

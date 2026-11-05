@@ -62,8 +62,7 @@ export function Home() {
               <span className="tiny-line" /> SOUND. SHARED.
             </span>
             <h1 data-hero-copy>
-              {data.home.headline.split(" ").slice(0, -2).join(" ")}
-              <br />
+              {data.home.headline.split(" ").slice(0, -2).join(" ")} <br />
               <span>{data.home.headline.split(" ").slice(-2).join(" ")}</span>
             </h1>
             <p data-hero-copy>{data.home.description}</p>

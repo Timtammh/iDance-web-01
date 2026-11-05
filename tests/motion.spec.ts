@@ -156,3 +156,62 @@ test("failed animation initialization restores readable static content", async (
   await page.locator("[data-hero] .button").click();
   await expect(page).toHaveURL(/\/products$/);
 });
+
+test("coordinated card hover and smooth indicator with immediate tab data", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Reject analytics" }).click();
+  const card = page.locator("#home-products .product-card").first();
+  await card.scrollIntoViewIfNeeded();
+  await expect(page.locator("[data-card-reveal]").first()).toHaveCSS(
+    "opacity",
+    "1",
+  );
+  await card.hover();
+  const hoverState = () =>
+    page.evaluate(async () => {
+      const path = "/src/lib/motion/gsap.ts";
+      const { gsap } = await import(/* @vite-ignore */ path);
+      return {
+        y: Number(
+          gsap.getProperty(
+            document.querySelector("#home-products .product-card"),
+            "y",
+          ),
+        ),
+        scale: Number(
+          gsap.getProperty(
+            document.querySelector("#home-products .product-image img"),
+            "scaleX",
+          ),
+        ),
+      };
+    });
+  await expect.poll(async () => (await hoverState()).y).toBe(-4);
+  await expect.poll(async () => (await hoverState()).scale).toBe(1.03);
+  await page.mouse.move(10, 100);
+  await expect.poll(async () => (await hoverState()).y).toBe(0);
+  const indicator = await page.evaluate(async () => {
+    const line = document.querySelector<HTMLElement>(".tab-indicator")!;
+    const target = document.querySelector<HTMLElement>("#tab-new")!;
+    const start = line.getBoundingClientRect().left;
+    target.click();
+    await new Promise(requestAnimationFrame);
+    await new Promise(requestAnimationFrame);
+    return {
+      start,
+      mid: line.getBoundingClientRect().left,
+      end: target.getBoundingClientRect().left,
+    };
+  });
+  expect(indicator.mid).toBeGreaterThan(indicator.start);
+  expect(indicator.mid).toBeLessThan(indicator.end);
+  await expect(page.getByRole("tabpanel")).toContainText("Little Sound Makers");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator("#home-products .product-card").first()).toHaveCSS(
+    "transform",
+    "none",
+  );
+});

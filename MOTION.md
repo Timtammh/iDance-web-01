@@ -38,7 +38,7 @@ Cyan/violet belongs to dark sections. Collection and featured sections use pearl
 
 ## Verification
 
-`npx playwright test --workers=1` includes the previous functional/a11y suite and `tests/motion.spec.ts`:
+`npx playwright test --workers=1` includes the previous functional/a11y suite and five dedicated tests in `tests/motion.spec.ts`:
 
 - Desktop/mobile/reduced-motion, breakpoint changes and rapid scroll-to-bottom/back.
 - Three Home/About return trips: zero ScrollTriggers/repeating tweens on About, no count growth after returning.
@@ -46,6 +46,13 @@ Cyan/violet belongs to dark sections. Collection and featured sections use pearl
 - Continuous animations pause offscreen; simulated document visibilitychange pauses/resumes all repeats.
 - Delayed async content follows the same provider path as CMS and creates triggers after mount. Failed images do not block copy or CTA.
 - Injected error after the Hero timeline is created verifies partial-initialization rollback and usable CTA.
+- Card hover was measured at -4px / scale 1.03; tab indicator was sampled between its old and new positions while new data appeared immediately.
 - Normal flow has no page exceptions or console warnings. The injected failure intentionally logs one diagnostic warning per StrictMode setup.
 
 This is local Chrome validation, not proof of performance on every phone. Live Sanity content and real device performance still need production credentials/content and hardware testing.
+
+### Sanity-mode integration test
+
+`npx playwright test --config playwright.cms.config.ts` starts a separate local server on port 5174 with `VITE_CONTENT_SOURCE=sanity`. All Sanity requests are intercepted; no account or remote dataset is accessed. A GROQ-shaped fixture exercises the actual Sanity client, error/retry UI, image URL builder and async provider. Product-grid trigger start positions are checked against actual DOM geometry at 375/768/1440px after resize (within 2px). Natural image width, route cleanup and CMS product rendering are checked too.
+
+The CMS test uses an isolated output folder and does not change `.env` or the normal production build configuration.
