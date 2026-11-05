@@ -1,0 +1,474 @@
+.hero {
+  background: #080d18;
+  color: #fff;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.heroInner {
+  min-height: 690px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  position: relative;
+}
+.heroCopy {
+  padding: 36px 0 72px;
+  z-index: 2;
+  position: relative;
+}
+.heroCopy h1 {
+  font-size: clamp(56px, 6.1vw, 87px);
+  font-weight: 450;
+  line-height: 1.04;
+  letter-spacing: -0.055em;
+  margin: 8px 0 28px;
+  max-width: 650px;
+}
+.heroCopy h1 span {
+  color: #b7c8dd;
+}
+.heroCopy > p {
+  color: #a3aebe;
+  font-size: 14px;
+  max-width: 345px;
+  line-height: 1.85;
+  margin-bottom: 36px;
+}
+.heroCopy .eyebrow {
+  color: #a5b3c6;
+}
+.heroStage {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+.heroProduct {
+  width: 100%;
+  height: 620px;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  transform: rotate(-9deg);
+  filter: drop-shadow(25px 30px 26px #0008);
+}
+.orbit,
+.orbitTwo {
+  position: absolute;
+  width: 570px;
+  height: 300px;
+  border: 1px solid #91b8d331;
+  border-radius: 50%;
+  transform: rotate(-35deg);
+  top: 29%;
+  left: -6%;
+  box-shadow:
+    0 -1px 0 #91b8d344,
+    0 -8px 26px -15px #65dfff66;
+}
+.orbitTwo {
+  width: 650px;
+  height: 370px;
+  top: 24%;
+  left: -12%;
+  border-color: #7580ba10;
+  box-shadow: none;
+}
+.heroCaption {
+  position: absolute;
+  bottom: 47px;
+  right: 14px;
+  font-size: 8px;
+  letter-spacing: 0.17em;
+  color: #7f8da5;
+}
+.heroFoot {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  color: #8290a7;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  border-top: 1px solid #ffffff12;
+}
+.heroFoot > span,
+.heroFoot > a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.heroFoot i {
+  height: 1px;
+  width: 55px;
+  background: #ffffff38;
+}
+.heroFoot > span:last-child {
+  color: #dce3f1;
+}
+.products {
+  background: #f5f6f8;
+}
+.useCases {
+  background: #0c1422;
+}
+.useGrid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 24px;
+}
+.useCard {
+  position: relative;
+  height: 340px;
+  overflow: hidden;
+  background: #162332;
+}
+.useCard:nth-child(3) {
+  height: 300px;
+}
+.useCard:nth-child(4) {
+  height: 300px;
+}
+.useCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #030911cc, transparent 85%);
+}
+.useCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s;
+  opacity: 0.8;
+}
+.useCard:hover img {
+  transform: scale(1.035);
+}
+.useCard > div {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  z-index: 2;
+}
+.useCard h3 {
+  font-size: 34px;
+  margin: 9px 0 0;
+}
+.useCard .eyebrow {
+  font-size: 9px;
+  color: #d1d6df;
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+.useCard > svg {
+  position: absolute;
+  bottom: 36px;
+  right: 28px;
+  z-index: 2;
+  width: 25px;
+  stroke-width: 1;
+}
+.useIndex {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  font-size: 10px;
+  z-index: 2;
+  color: #d8e0ed;
+}
+.featured {
+  background: #eff1f3;
+}
+.featuredInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+.featuredImage {
+  position: relative;
+  height: 510px;
+  display: grid;
+  place-items: center;
+}
+.featureProduct img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  transform: rotate(-7deg);
+}
+.featureCircle {
+  position: absolute;
+  width: 90%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #e0e5e9, #f8f9fc);
+  border: 1px solid #e0e3e7;
+}
+.featuredImage > span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 8px;
+  letter-spacing: 0.13em;
+  color: #7a8390;
+}
+.featuredCopy h2 {
+  font-size: clamp(40px, 4.3vw, 62px);
+  line-height: 1.08;
+}
+.featuredCopy > p {
+  font-size: 14px;
+  color: #64707e;
+  max-width: 380px;
+}
+.featuredCopy ul {
+  list-style: none;
+  padding: 0;
+  margin: 28px 0 34px;
+}
+.featuredCopy li {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  margin-bottom: 16px;
+  color: #5c6573;
+}
+.featuredCopy li svg {
+  color: #7c8ca6;
+}
+.experience {
+  background: #10182a;
+}
+.brandCta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  text-align: center;
+  color: white;
+  padding: 100px 24px 110px;
+  background: #0a111e;
+}
+.brandCta > h2 {
+  font-size: clamp(42px, 5vw, 70px);
+  max-width: 780px;
+  margin: 0 auto 36px;
+}
+.brandCta > .eyebrow {
+  color: #9ba9c0;
+}
+.brandCta > div:last-child {
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+.heroCopy :global(.video-link) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+.heroCopy :global(.video-link) > span {
+  display: grid;
+  place-items: center;
+  width: 37px;
+  height: 37px;
+  border: 1px solid #586578;
+  border-radius: 50%;
+}
+@media (min-width: 1500px) {
+  .heroInner {
+    min-height: 760px;
+  }
+  .heroProduct {
+    height: 690px;
+  }
+}
+@media (max-width: 1024px) {
+  .heroInner {
+    min-height: 630px;
+  }
+  .heroProduct {
+    height: 550px;
+  }
+  .heroCopy h1 {
+    font-size: 64px;
+  }
+  .heroCopy :global(.button-row) {
+    gap: 18px;
+  }
+  .featuredInner {
+    gap: 45px;
+  }
+  .useCard {
+    height: 300px;
+  }
+  .useCard h3 {
+    font-size: 28px;
+  }
+}
+@media (max-width: 767px) {
+  .heroInner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 0;
+    padding-top: 42px;
+  }
+  .heroCopy {
+    padding: 0;
+    z-index: 3;
+  }
+  .heroCopy h1 {
+    font-size: clamp(51px, 10vw, 72px);
+    margin: 0 0 20px;
+    max-width: 500px;
+  }
+  .heroCopy > p {
+    font-size: 13px;
+    max-width: 330px;
+    margin-bottom: 24px;
+  }
+  .heroCopy :global(.button) {
+    padding: 15px 17px;
+    gap: 18px;
+    font-size: 12px;
+  }
+  .heroCopy :global(.button-row) {
+    gap: 22px;
+  }
+  .heroCopy :global(.eyebrow) {
+    margin-bottom: 22px;
+  }
+  .heroStage {
+    height: 370px;
+    margin: 4px -20px 48px;
+  }
+  .heroProduct {
+    height: 390px;
+    width: 100%;
+    transform: rotate(-9deg);
+  }
+  .orbit {
+    width: 380px;
+    height: 190px;
+    left: calc(50% - 190px);
+    top: 25%;
+  }
+  .orbitTwo {
+    width: 450px;
+    height: 240px;
+    left: calc(50% - 225px);
+    top: 20%;
+  }
+  .heroCaption {
+    bottom: 12px;
+    right: 25px;
+    font-size: 7px;
+  }
+  .heroFoot {
+    font-size: 7px;
+    padding: 18px 0;
+  }
+  .heroFoot > a {
+    display: none;
+  }
+  .heroFoot i {
+    width: 30px;
+  }
+  .products :global(.product-grid) {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding-bottom: 16px;
+  }
+  .products :global([data-card-reveal]) {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+  }
+  .products :global(.product-image) {
+    aspect-ratio: 1.1;
+  }
+  .useGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .useCard,
+  .useCard:nth-child(3),
+  .useCard:nth-child(4) {
+    height: 280px;
+  }
+  .useCard > div {
+    left: 24px;
+    bottom: 24px;
+  }
+  .useCard h3 {
+    font-size: 30px;
+  }
+  .useCard > svg {
+    bottom: 28px;
+    right: 20px;
+  }
+  .featuredInner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .featuredImage {
+    height: 380px;
+  }
+  .featureCircle {
+    width: 90%;
+    max-width: 380px;
+  }
+  .featuredCopy h2 {
+    font-size: 44px;
+  }
+  .featuredCopy :global(.button) {
+    font-size: 12px;
+    padding: 16px;
+  }
+  .brandCta {
+    padding: 76px 20px 86px;
+  }
+  .brandCta > h2 {
+    font-size: 43px;
+  }
+  .brandCta :global(.button-row) {
+    gap: 24px;
+  }
+  .brandCta :global(.button) {
+    font-size: 12px;
+  }
+  .heroFoot > span:first-child {
+    gap: 6px;
+  }
+}
+
+.heroFloat {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+.featureProduct {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+@media (hover: none) {
+  .useCard:hover img {
+    transform: none;
+  }
+}

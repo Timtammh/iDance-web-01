@@ -1,0 +1,86 @@
+.light {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--light-intensity);
+  mix-blend-mode: screen;
+}
+.layer {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+.spotlight .beam {
+  inset: -40% -10% 0 25%;
+  background: conic-gradient(
+    from 160deg at 50% 0%,
+    transparent 0deg,
+    color-mix(in srgb, var(--light-color) 16%, transparent) 14deg,
+    transparent 32deg
+  );
+  filter: blur(14px);
+  transform: rotate(-18deg);
+}
+.spotlight .ambient {
+  inset: 0;
+  background: radial-gradient(
+    ellipse at var(--light-position),
+    color-mix(in srgb, var(--light-color) 12%, transparent),
+    transparent 55%
+  );
+}
+.horizon .layer {
+  width: 130%;
+  height: 50%;
+  left: -15%;
+  bottom: -43%;
+  border-radius: 50%;
+  border-top: 1px solid color-mix(in srgb, var(--light-color) 80%, transparent);
+  box-shadow:
+    0 -15px 60px -15px var(--light-color),
+    0 -3px 16px -5px var(--light-color);
+}
+.halo .layer {
+  inset: 8%;
+  background: radial-gradient(
+    ellipse at var(--light-position),
+    color-mix(in srgb, var(--light-color) 25%, transparent),
+    transparent 62%
+  );
+}
+.refraction .layer {
+  width: 150%;
+  height: 70px;
+  left: -25%;
+  top: 40%;
+  transform: rotate(-28deg);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--light-color) 8%, transparent) 48%,
+    color-mix(in srgb, var(--light-color) 32%, transparent) 49%,
+    transparent 50%
+  );
+}
+.reflection .layer {
+  width: 60%;
+  height: 8%;
+  left: 20%;
+  bottom: 7%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    color-mix(in srgb, var(--light-color) 40%, transparent),
+    transparent 70%
+  );
+  filter: blur(10px);
+}
+@media (max-width: 700px) {
+  .light {
+    opacity: calc(var(--light-intensity) * 0.65);
+  }
+  .spotlight .beam {
+    filter: none;
+  }
+}
