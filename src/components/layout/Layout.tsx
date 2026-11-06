@@ -93,6 +93,7 @@ export function Layout() {
             <Link className="wordmark" to="/">
               <img src={bottomLogo} alt="iDance" />
             </Link>
+            <p className="footer-company-name">iDance International limited</p>
             <p>{data.settings.brandStatement}</p>
             <div className="footer-socials" aria-label="Social media">
               {socialIcons.map(({ name, icon, match }) => {

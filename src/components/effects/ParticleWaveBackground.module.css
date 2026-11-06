@@ -1,3 +1,30 @@
 .background { position:fixed; inset:0; z-index:0; pointer-events:none; background:#000; overflow:hidden; }
-.canvas,.fallback { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
-.canvas canvas { display:block; width:100%; height:100%; }
+.rails { position:absolute; top:0; height:100%; width:clamp(80px,16vw,280px); mask-image:linear-gradient(to right,#000 75%,transparent); pointer-events:none; }
+.left { left:0; }
+.right { right:0; transform:scaleX(-1); }
+.right .rail:nth-child(3),.right .rail:nth-child(4) { --rail-offset:-85px; }
+.right .rail:nth-child(7) { --rail-offset:95px; }
+.rail { animation:railFloat 10s ease-in-out infinite alternate; }
+@keyframes railFloat {
+  from { transform:translateY(calc(var(--rail-offset,0px) - 22px)); opacity:.78; }
+  to { transform:translateY(calc(var(--rail-offset,0px) + 22px)); opacity:1; }
+}
+.curveTube { animation:curveFloat 11s ease-in-out infinite alternate; }
+@keyframes curveFloat {
+  0% { transform:translate(-7px,-8px); opacity:.8; }
+  50% { transform:translate(3px,2px); opacity:1; }
+  100% { transform:translate(9px,10px); opacity:.9; }
+}
+.rearLight { animation:rearFloat 8s ease-in-out infinite alternate; }
+@keyframes rearFloat { from { transform:translateY(-12px); } to { transform:translateY(12px); } }
+@media(max-width:767px) {
+  .rails { width:48px; opacity:.8; }
+  .rail:nth-child(2),.rail:nth-child(n+4) { display:none; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .rail,.curveTube,.rearLight { animation:none; }
+  .rail { transform:translateY(var(--rail-offset,0px)); }
+}
+
+.curves { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; opacity:.85; }
+@media(max-width:767px) { .curves { opacity:.4; } }
