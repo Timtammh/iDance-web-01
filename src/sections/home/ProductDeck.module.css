@@ -93,3 +93,24 @@
   .knobControl .knob,.pads button { transition:none; }
   .pads button:active { transform:none; }
 }
+
+/* One complete product per phone viewport; keep the mixer within its grid. */
+@media(max-width:767px) {
+  .section { padding:36px 16px; }
+  .heading { margin-bottom:20px; }
+  .heading h2 { font-size:40px; letter-spacing:-1.5px; }
+  .deck { width:100%; min-width:0; padding:18px 14px 22px; border-radius:20px; }
+  .top { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px; margin:0 0 16px; }
+  .top>.knobControl,.controls { display:none; }
+  .tabGroup>button { min-width:0; font-size:14px; padding:10px 4px; }
+  .tabGroup>button:nth-of-type(2) { grid-column:2; grid-row:1; }
+  .rail { width:100%; min-width:0; gap:16px; scroll-snap-type:x mandatory; }
+  .product { flex:0 0 100%; max-width:100%; scroll-snap-align:center; scroll-snap-stop:always; }
+  .disc { width:100%; max-width:320px; margin:auto; padding:10px; }
+  .disc img { object-fit:contain; }
+  .product>span { font-size:12px; padding-top:12px; }
+  .bottom { display:block; margin:16px 0 0; }
+  .faderGroup { margin:0; }
+  .pads,.sideFader { display:none; }
+  .section::before { filter:none; }
+}

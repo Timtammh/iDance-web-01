@@ -73,7 +73,7 @@ export function ProductDeck() {
     const observer = new IntersectionObserver(([entry]) => {
       if (!entry.isIntersecting) return;
       observer.disconnect();
-      if (preference.matches) return;
+      if (preference.matches || window.matchMedia("(max-width: 767px)").matches) return;
       el.querySelectorAll(`.${styles.product}`).forEach((card, index) => {
         animations.push(card.animate([
           { opacity: 0, transform: "translateY(66px) scale(.88)" },
@@ -110,7 +110,7 @@ export function ProductDeck() {
         onLostPointerCapture={() => { drag.current.active = false; }}
         onClickCapture={e => { if (drag.current.moved) { e.preventDefault(); drag.current.moved = false; } }}
         onDragStart={e => e.preventDefault()}>
-        {products.map(p => <Link to={p.href} className={styles.product} key={p.id} draggable={false}><div className={styles.disc}><img src={p.image} alt={p.name} draggable={false} /></div><span>{p.name}<ArrowUpRight size={15} /></span></Link>)}
+        {products.map(p => <Link to={p.href} className={styles.product} key={p.id} draggable={false}><div className={styles.disc}><img src={p.image} alt={p.name} loading="lazy" decoding="async" width={640} height={640} draggable={false} /></div><span>{p.name}<ArrowUpRight size={15} /></span></Link>)}
         {!products.length && <p>No products in this collection yet.</p>}
       </div>
       <div className={styles.bottom}>

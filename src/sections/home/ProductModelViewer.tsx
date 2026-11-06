@@ -33,7 +33,8 @@ export function ProductModelViewer() {
       setStatus("模型載入失敗 · Unable to display 3D model. Please reload.");
       return;
     }
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const compact = window.matchMedia("(max-width: 767px)");
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, compact.matches ? 1 : 2));
     renderer.setClearColor(0x000000, 0);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 0.8;
@@ -54,7 +55,7 @@ export function ProductModelViewer() {
     scene.add(new THREE.HemisphereLight(0xffffff, 0x606060, 0.25));
     const key = new THREE.DirectionalLight(0xffffff, 2.2);
     key.castShadow = true;
-    key.shadow.mapSize.set(2048, 2048);
+    key.shadow.mapSize.set(compact.matches ? 1024 : 2048, compact.matches ? 1024 : 2048);
     key.shadow.bias = -0.0003;
     scene.add(key);
     const framingPoints: THREE.Vector3[] = [];
@@ -67,7 +68,7 @@ export function ProductModelViewer() {
       const vertical = THREE.MathUtils.degToRad(camera.fov / 2);
       const horizontal = Math.atan(Math.tan(vertical) * camera.aspect);
       const distance = radius / Math.sin(Math.min(vertical, horizontal)) * 1.12;
-      camera.zoom = 1.2;
+      camera.zoom = compact.matches ? 1 : 1.2;
       camera.position.set(distance * Math.cos(elevation) * Math.sin(azimuth), distance * Math.sin(elevation), distance * Math.cos(elevation) * Math.cos(azimuth));
       camera.near = distance / 100;
       camera.far = distance + radius * 10;
@@ -104,6 +105,7 @@ export function ProductModelViewer() {
       const width = element.clientWidth;
       const height = element.clientHeight;
       if (!width || !height) return;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, compact.matches ? 1 : 2));
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       render();

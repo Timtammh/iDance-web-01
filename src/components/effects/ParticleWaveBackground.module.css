@@ -28,3 +28,19 @@
 
 .curves { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; opacity:.85; }
 @media(max-width:767px) { .curves { opacity:.4; } }
+
+/* Phone GPUs should composite a few layers, not repaint dozens of SVG blurs. */
+@media(max-width:767px) {
+  .rail,.curveTube,.rearLight { animation:none; }
+  .rail { transform:translateY(var(--rail-offset,0px)); }
+  .rails { width:34px; opacity:.65; }
+  .rails path[filter],.curves path[filter] { display:none; }
+  .curves { opacity:.22; }
+  .curveTube>path { display:none; }
+  .curveTube>path:nth-child(4),.curveTube>path:nth-child(7) { display:block; }
+  .left { animation:mobileLeftFloat 12s ease-in-out infinite alternate; }
+  .right { animation:mobileRightFloat 14s ease-in-out infinite alternate; }
+  @keyframes mobileLeftFloat { from { transform:translateY(-6px); } to { transform:translateY(6px); } }
+  @keyframes mobileRightFloat { from { transform:scaleX(-1) translateY(6px); } to { transform:scaleX(-1) translateY(-6px); } }
+}
+@media(prefers-reduced-motion:reduce) { .left,.right { animation:none; } }
