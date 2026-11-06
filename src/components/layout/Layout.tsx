@@ -1,9 +1,20 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
-import { Search, Menu, ArrowUpRight, AudioLines } from "lucide-react";
+import { Search, Menu, ArrowUpRight } from "lucide-react";
 import { useContent } from "../../hooks/useContent";
+const ParticleWaveBackground = lazy(() => import("../effects/ParticleWaveBackground").then(module => ({ default: module.ParticleWaveBackground })));
 import { Modal } from "../ui/Modal";
 import { savedConsent, setConsent } from "../../lib/analytics";
+import topLogo from "../../pic/top.svg";
+import bottomLogo from "../../pic/bottom.jpg";
+import instagramIcon from "../../icon/instagram (1).png";
+import facebookIcon from "../../icon/facebook.png";
+import youtubeIcon from "../../icon/youtube.png";
+const socialIcons = [
+  { name: "Instagram", icon: instagramIcon, match: /instagram|^ig$/i },
+  { name: "Facebook", icon: facebookIcon, match: /facebook|^fb$/i },
+  { name: "YouTube", icon: youtubeIcon, match: /youtube|youtu\.be/i },
+];
 export function Layout() {
   const data = useContent();
   const [menu, setMenu] = useState(false),
@@ -37,18 +48,13 @@ export function Layout() {
   };
   return (
     <>
+      <Suspense fallback={null}><ParticleWaveBackground /></Suspense>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
       <header className="header">
         <Link className="wordmark" to="/" aria-label="iDance home">
-          {data.settings.logo ? (
-            <img src={data.settings.logo.url} alt="iDance" />
-          ) : (
-            <>
-              iDance<span>®</span>
-            </>
-          )}
+          <img src={topLogo} alt="iDance" width={47.3} height={57.2} />
         </Link>
         <nav aria-label="Main navigation" className="desktop-nav">
           {nav.map((n) => (
@@ -85,10 +91,18 @@ export function Layout() {
         <div className="container footer-top">
           <div>
             <Link className="wordmark" to="/">
-              iDance<span>®</span>
+              <img src={bottomLogo} alt="iDance" />
             </Link>
             <p>{data.settings.brandStatement}</p>
-            <AudioLines size={30} strokeWidth={1} />
+            <div className="footer-socials" aria-label="Social media">
+              {socialIcons.map(({ name, icon, match }) => {
+                const social = data.settings.socialLinks?.find(link => match.test(link.label) || match.test(link.url));
+                const image = <img src={icon} alt={name} width={24} height={24} />;
+                return social ? (
+                  <a key={name} href={social.url} target="_blank" rel="noopener noreferrer" aria-label={`${name} (opens in new tab)`}>{image}</a>
+                ) : <span key={name}>{image}</span>;
+              })}
+            </div>
           </div>
           <div>
             <h3>Discover</h3>

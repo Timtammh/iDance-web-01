@@ -19,7 +19,7 @@
 }
 .heroCopy h1 {
   font-size: clamp(56px, 6.1vw, 87px);
-  font-weight: 450;
+  font-weight: 600;
   line-height: 1.04;
   letter-spacing: -0.055em;
   margin: 8px 0 28px;
@@ -268,7 +268,7 @@
 .brandCta > .eyebrow {
   color: #9ba9c0;
 }
-.brandCta > div:last-child {
+.brandCta > :global(.button-row) {
   justify-content: center;
   position: relative;
   z-index: 1;
@@ -472,3 +472,9 @@
     transform: none;
   }
 }
+
+.withParticleBackdrop { position:relative; isolation:isolate; }
+.withParticleBackdrop > :global(.container), .withParticleBackdrop > h2, .withParticleBackdrop > :global(.eyebrow), .withParticleBackdrop > :global(.button-row) { position:relative; z-index:1; }
+
+/* Only dark sections reveal the fixed wave. Light sections stay opaque. */
+.withParticleBackdrop:global(.dark),.brandCta.withParticleBackdrop { background:transparent; color:#f5f7fb; }

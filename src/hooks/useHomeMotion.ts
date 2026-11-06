@@ -47,8 +47,8 @@ export function useHomeMotion(root: RefObject<HTMLDivElement | null>) {
               select("[data-hero-copy]"),
               {
                 opacity: 0,
-                y: 18,
-                duration: 0.65,
+                y: 54,
+                duration: 1.95,
                 stagger: motion.hero.stagger,
                 clearProps: "opacity,transform",
               },
@@ -126,9 +126,9 @@ export function useHomeMotion(root: RefObject<HTMLDivElement | null>) {
               if (media?.desktop && (type === "halo" || type === "horizon"))
                 gsap.fromTo(
                   layer,
-                  { y: 8 },
+                  { y: 24 },
                   {
-                    y: -8,
+                    y: -24,
                     ease: "none",
                     scrollTrigger: {
                       trigger: section,
@@ -237,8 +237,8 @@ export function useProductReveal(
           if (cards?.length)
             gsap.from(cards, {
               opacity: 0,
-              y: 20,
-              duration: 0.6,
+              y: 60,
+              duration: 1.8,
               stagger: motion.reveal.stagger,
               ease: "power2.out",
               immediateRender: false,

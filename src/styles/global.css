@@ -1,6 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&display=swap");
+@font-face {
+  font-family: "Parkinsans";
+  src: url("../font/Parkinsans-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Parkinsans";
+  src: url("../font/Parkinsans-SemiBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
 :root {
-  font-family: "DM Sans", Arial, sans-serif;
+  font-family: "Parkinsans", Arial, sans-serif;
   color: #151922;
   background: #080d18;
   font-synthesis: none;
@@ -56,8 +69,11 @@ p {
 }
 h1,
 h2,
-h3 {
-  font-weight: 500;
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
   letter-spacing: -0.045em;
 }
 h1 {
@@ -155,7 +171,7 @@ section[id] {
   align-items: center;
   gap: 16px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   padding: 8px 0;
   border-bottom: 1px solid currentColor;
   align-self: flex-start;
@@ -173,7 +189,7 @@ section[id] {
   padding: 17px 23px;
   border: 1px solid transparent;
   font-size: 13px;
-  font-weight: 550;
+  font-weight: 600;
   line-height: 1.4;
   min-height: 50px;
   transition:
@@ -213,7 +229,7 @@ section[id] {
   backdrop-filter: blur(12px);
 }
 .wordmark {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 32px;
   letter-spacing: -2px;
   line-height: 1;
@@ -228,6 +244,19 @@ section[id] {
 .wordmark img {
   max-width: 110px;
   max-height: 52px;
+}
+.header .wordmark {
+  display: flex;
+  align-items: center;
+  flex: 0 0 47.3px;
+  width: 47.3px;
+  height: 57.2px;
+}
+.header .wordmark img {
+  width: 47.3px;
+  height: 57.2px;
+  max-height: 57.2px;
+  object-fit: contain;
 }
 .desktop-nav {
   display: flex;
@@ -572,7 +601,7 @@ section[id] {
   flex-direction: column;
   gap: 10px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   margin-bottom: 22px;
 }
 .field input,
@@ -609,7 +638,7 @@ section[id] {
 }
 .consent strong {
   font-size: 15px;
-  font-weight: 550;
+  font-weight: 600;
 }
 .consent p {
   font-size: 12px;
@@ -1001,3 +1030,41 @@ section[id] {
     display: none;
   }
 }
+
+/* Shared content gutters; section backgrounds remain full width. */
+:root { --site-gutter: 20px; }
+@media (min-width: 768px) {
+  :root { --site-gutter: 8vw; }
+}
+@media (min-width: 1200px) {
+  :root { --site-gutter: 15vw; }
+}
+.container { width: min(var(--max), calc(100% - var(--site-gutter) * 2)); }
+.header { padding-inline: var(--site-gutter); gap: 20px; }
+@media (min-width: 1200px) and (max-width: 1599px) {
+  .desktop-nav { gap: 16px; }
+  .header-actions { gap: 12px; }
+  .header-explore { display: none; }
+}
+
+.footer-socials { display:flex; align-items:center; gap:12px; }
+.footer-socials>a,.footer-socials>span { display:flex; align-items:center; justify-content:center; width:40px; height:40px; border:1px solid #d9dde3; border-radius:50%; }
+.footer-socials img { width:24px; height:24px; object-fit:contain; }
+.footer-socials>a { transition:transform .2s ease,background .2s ease; }
+.footer-socials>a:hover { background:#e5e9ef; transform:translateY(-2px); }
+@media(prefers-reduced-motion:reduce) { .footer-socials>a { transition:none; } .footer-socials>a:hover { transform:none; } }
+
+.intro-screen { position:fixed; inset:0; z-index:1000; background:#000; }
+.intro-screen video { display:block; width:100%; height:100%; object-fit:contain; pointer-events:none; }
+.intro-enter { position:absolute; inset:0; width:100%; height:100%; border:0; padding:0; background:transparent; color:#fff; cursor:pointer; display:flex; align-items:flex-end; justify-content:center; }
+.intro-enter>span { margin:0 20px max(32px,env(safe-area-inset-bottom)); padding:12px 22px; border:1px solid #ffffff40; border-radius:30px; background:#0009; backdrop-filter:blur(12px); font-size:12px; letter-spacing:1px; }
+.intro-enter small { display:block; margin-top:5px; color:#c4c8cf; font-size:9px; letter-spacing:.5px; }
+.intro-enter:focus-visible { outline:2px solid #b4deff; outline-offset:-6px; }
+
+/* Site content above the fixed, non-interactive WebGL background. */
+body { background:#000; }
+#main,.footer { position:relative; z-index:1; }
+
+/* A continuous wave behind dark sections; light/metal surfaces mask it. */
+#main .dark { background:transparent; }
+#main .light { background:var(--paper); }
