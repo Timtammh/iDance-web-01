@@ -84,6 +84,60 @@ export function useHomeMotion(root: RefObject<HTMLDivElement | null>) {
             playback = visiblePlayback(hero, [floating, glow], () => entered);
             disposers.push(playback.dispose);
           }
+          const cta = select("[data-brand-cta]")[0] as HTMLElement | undefined;
+          if (cta) {
+            const reveal = gsap.from(cta.querySelectorAll("[data-cta-reveal]"), {
+              opacity: 0,
+              y: 36,
+              duration: 1.2,
+              stagger: 0.16,
+              ease: "power3.out",
+              immediateRender: false,
+              clearProps: "opacity,transform",
+              scrollTrigger: {
+                trigger: cta,
+                start: "top 80%",
+                once: true,
+                fastScrollEnd: true,
+              },
+            });
+            const finishReveal = () => {
+              reveal.scrollTrigger?.kill(false);
+              reveal.progress(1);
+            };
+            cta.addEventListener("focusin", finishReveal);
+            disposers.push(() => cta.removeEventListener("focusin", finishReveal));
+
+            cta.querySelectorAll<HTMLElement>("[data-cta-link]").forEach((link) => {
+              const hover = gsap.to(link.querySelector("svg"), {
+                x: 5,
+                y: link.dataset.ctaLink === "contact" ? -5 : 0,
+                duration: 0.3,
+                ease: "power2.out",
+                paused: true,
+              });
+              let pointed = false;
+              let focused = false;
+              const sync = () => pointed || focused ? hover.play() : hover.reverse();
+              const enter = (event: PointerEvent) => {
+                pointed = event.pointerType === "mouse";
+                sync();
+              };
+              const leave = () => { pointed = false; sync(); };
+              const focus = () => { focused = link.matches(":focus-visible"); sync(); };
+              const blur = () => { focused = false; sync(); };
+              link.addEventListener("pointerenter", enter);
+              link.addEventListener("pointerleave", leave);
+              link.addEventListener("focus", focus);
+              link.addEventListener("blur", blur);
+              disposers.push(() => {
+                link.removeEventListener("pointerenter", enter);
+                link.removeEventListener("pointerleave", leave);
+                link.removeEventListener("focus", focus);
+                link.removeEventListener("blur", blur);
+              });
+            });
+          }
           select("[data-reveal]").forEach((element: HTMLElement) => {
             // Start at the trigger, not at page initialization: offscreen content remains readable on failure.
             gsap.from(element, {

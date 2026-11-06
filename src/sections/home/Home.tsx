@@ -157,16 +157,18 @@ export function Home() {
           </div>
         </div>
       </section>
-      <section className={`${styles.brandCta} ${styles.withParticleBackdrop}`}>
+      <section className={`${styles.brandCta} ${styles.withParticleBackdrop}`} data-brand-cta>
         <Light variant="horizon" color="#9fa8ff" intensity={0.75} />
-        <span className="eyebrow">GOOD MOMENTS START WITH SOUND</span>
-        <h2 data-reveal>{data.home.cta}</h2>
+        <span className="eyebrow" data-cta-reveal>GOOD MOMENTS START WITH SOUND</span>
+        <h2 data-cta-reveal>{data.home.cta}</h2>
         <div className="button-row">
-          <Link className="button" to="/products">
+          <Link className="button" to="/products" data-cta-reveal data-cta-link="products">
             Explore products <ArrowRight size={18} />
           </Link>
           <Link
             className="text-link"
+            data-cta-reveal
+            data-cta-link="contact"
             to="/contact"
             onClick={() => track("contact_click", { source: "home_cta" })}
           >
